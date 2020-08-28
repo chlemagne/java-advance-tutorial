@@ -1,10 +1,14 @@
 package com.cehernani.exceptions;
 
 import java.io.FileReader;
+import java.io.FileNotFoundException;
 
 public class ExceptionsDemo {
     public static void show() {
-        var reader = new FileReader("file.txt");
-        System.out.println("File opened");
+        try {
+            var reader = new FileReader("file.txt");
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
