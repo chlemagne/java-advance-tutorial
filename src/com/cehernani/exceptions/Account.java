@@ -11,10 +11,14 @@ public class Account {
             throw new IOException();
     }
 
-    public float withdraw(float value) throws InsufficientFundsException {
-        if (value > balance)
-            throw new InsufficientFundsException();
+    public float withdraw(float value) throws AccountException {
+        if (value > balance) {
+            var fundsException = new InsufficientFundsException();
+            var accountException = new AccountException();
 
+            accountException.initCause(fundsException);
+            throw accountException;
+        }
         return balance;
     }
 }

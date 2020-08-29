@@ -30,13 +30,13 @@ public class ExceptionsDemo {
         }
     }
 
-    public static void show3() throws InsufficientFundsException {
+    public static void show3() throws AccountException {
         var account = new Account();
 
         try {
             account.withdraw(50);
-        } catch(InsufficientFundsException e) {
-            System.out.println(e.getMessage());
+        } catch(AccountException e) {
+            e.printStackTrace();
             throw e;
         }
     }
