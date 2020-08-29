@@ -12,13 +12,9 @@ public class Account {
     }
 
     public float withdraw(float value) throws AccountException {
-        if (value > balance) {
-            var fundsException = new InsufficientFundsException();
-            var accountException = new AccountException();
+        if (value > balance)
+            throw new AccountException(new InsufficientFundsException());
 
-            accountException.initCause(fundsException);
-            throw accountException;
-        }
         return balance;
     }
 }
