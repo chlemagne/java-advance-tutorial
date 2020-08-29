@@ -29,4 +29,15 @@ public class ExceptionsDemo {
             throw e;
         }
     }
+
+    public static void show3() throws InsufficientFundsException {
+        var account = new Account();
+
+        try {
+            account.withdraw(50);
+        } catch(InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
 }

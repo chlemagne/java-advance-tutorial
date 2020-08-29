@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 	    // write your code here
         try {
-            ExceptionsDemo.show2();
+            ExceptionsDemo.show3();
         } catch(Throwable e) {
             System.out.println("An unexpected error occurred.");
         }
