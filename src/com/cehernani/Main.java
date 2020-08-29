@@ -1,24 +1,26 @@
 package com.cehernani;
 
-import com.cehernani.generics.List;
+import com.cehernani.generics.GenericList;
 import com.cehernani.generics.User;
 
 public class Main {
 
     public static void main(String[] args) {
 	    // write your code here
-        var list = new List();
+        var intList = new GenericList<Integer>();
+        var stringList = new GenericList<String>();
+        var userList = new GenericList<User>();
 
-        // append objects
-        list.add(1);                    // index 0; Java compiler transforms this line to line below
-        list.add(Integer.valueOf(1));   // index 1;
-        list.add("Hello, world!");      // index 2;
-        list.add(new User());           // index 3;
+        intList.add(1);                 // boxing; compiler transforms a primitive type value to reference type
+        int intValue = intList.get(0);  // unboxing; opposite
+        System.out.println(intValue);
 
-        // retrieve objects
-        int firstValue = (int) list.get(0); // explicit cast object to primitive type integer
-        int thirdValue = (int) list.get(2); // PROBLEM: unchecked exception; index 2 returns a String object and cannot
-                                            // be casted to integer; Java will raise ClassCastException on runtime;
-                                            // Java Generics handles these errors on compile-time as checked exceptions.
+        stringList.add("Hello, world!");
+        String stringValue = stringList.get(0);
+        System.out.println(stringValue);
+
+        userList.add(new User());
+        User user = userList.get(0);
+        System.out.println(user);
     }
 }
