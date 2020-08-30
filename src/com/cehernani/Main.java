@@ -30,5 +30,7 @@ public class Main {
             System.out.println("User1 < User2");
 
         System.out.println(Utils.max(new User(100), new User(200)));
+
+        Utils.print(1, "Ball");
     }
 }
