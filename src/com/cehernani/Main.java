@@ -3,6 +3,7 @@ package com.cehernani;
 import com.cehernani.generics.GenericList;
 import com.cehernani.generics.NumberList;
 import com.cehernani.generics.User;
+import com.cehernani.generics.Utils;
 
 public class Main {
 
@@ -27,5 +28,7 @@ public class Main {
         int compareResult = userList.get(0).compareTo(userList.get(1));
         if (compareResult < 0)
             System.out.println("User1 < User2");
+
+        System.out.println(Utils.max(new User(100), new User(200)));
     }
 }
