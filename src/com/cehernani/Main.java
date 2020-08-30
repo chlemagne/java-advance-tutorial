@@ -1,13 +1,14 @@
 package com.cehernani;
 
 import com.cehernani.generics.GenericList;
+import com.cehernani.generics.NumberList;
 import com.cehernani.generics.User;
 
 public class Main {
 
     public static void main(String[] args) {
 	    // write your code here
-        var intList = new GenericList<Integer>();
+        var intList = new NumberList<Integer>();
         var stringList = new GenericList<String>();
         var userList = new GenericList<User>();
 
