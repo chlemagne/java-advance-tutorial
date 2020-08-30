@@ -19,8 +19,12 @@ public class Main {
         String stringValue = stringList.get(0);
         System.out.println(stringValue);
 
-        userList.add(new User());
+        userList.add(new User(10));
+        userList.add(new User(20));
         User user = userList.get(0);
         System.out.println(user);
+        int compareResult = userList.get(0).compareTo(userList.get(1));
+        if (compareResult < 0)
+            System.out.println("User1 < User2");
     }
 }
