@@ -1,9 +1,6 @@
 package com.cehernani;
 
-import com.cehernani.generics.GenericList;
-import com.cehernani.generics.NumberList;
-import com.cehernani.generics.User;
-import com.cehernani.generics.Utils;
+import com.cehernani.generics.*;
 
 public class Main {
 
@@ -32,5 +29,29 @@ public class Main {
         System.out.println(Utils.max(new User(100), new User(200)));
 
         Utils.print(1, "Ball");
+
+        // OK; User <--- User
+        User u1 = new User(10);
+
+        // OK; User <--- Instructor
+        User u2 = new Instructor(20);
+
+        /*
+            NOK; Instructor <-/- User
+
+            Object
+                Vehicle
+                    Car
+                    Motorcycle
+                User
+                    Driver
+                    Instructor
+
+            User can be either Driver, Instructor, or something else.
+         */
+        // Instructor i1 = new User(30);
+
+        // OK; Instructor <--- User
+        Instructor i2 = new Instructor(40);
     }
 }
