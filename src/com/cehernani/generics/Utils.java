@@ -55,4 +55,23 @@ public class Utils {
                 param.add(new Instructor(2));
          */
     }
+
+    /**
+     * Wildcard Example 3 that accepts a generics super class (Object) of class User.
+     *
+     * @param param
+     */
+    public static void demoSuperGenericList (GenericList<? super User> param) {
+        Object w = param.get(0);
+        param.add(new User(10));
+
+        /*
+            NOTE:
+                Wildcard <? super SomeClass> get methods return Object type.
+                Hence, it cannot put the results in a variable with type SomeClass.
+
+            ERROR:
+                User x = param.get(0);
+         */
+    }
 }
