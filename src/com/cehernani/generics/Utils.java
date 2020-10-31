@@ -20,4 +20,16 @@ public class Utils {
     public static <K, V> void print(K key, V value) {
         System.out.println(key + "=" + value);
     }
+
+    /**
+     * Wildcard Example 1 that accepts a generic class of any type.
+     *
+     * Java backend implementation:
+     *      class CAP#1 {}
+     *
+     * @param param
+     */
+    public static void demoAnyGenericList (GenericList<?> param) {
+        Object x = param.get(0);
+    }
 }
