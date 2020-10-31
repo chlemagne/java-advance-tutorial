@@ -32,4 +32,27 @@ public class Utils {
     public static void demoAnyGenericList (GenericList<?> param) {
         Object x = param.get(0);
     }
+
+    /**
+     * Wildcard Example 2 that accepts a generics subclass of class User.
+     *
+     * Java backend implementation:
+     *      class CAP#1 extends User {}
+     *
+     * @param param
+     */
+    public static void demoSubclassGenericList (GenericList<? extends User> param) {
+        Object w = param.get(0);
+        User x = param.get(0);
+
+        /*
+            NOTE:
+                Wildcard <? extends SomeClass> does not have access to class CAP#1.
+                Hence, this wildcard cannot modify the parameter ``param``.
+
+            ERROR:
+                param.add(new User(1));
+                param.add(new Instructor(2));
+         */
+    }
 }
