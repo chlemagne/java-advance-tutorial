@@ -39,9 +39,7 @@ public class LambdasDemo {
             >> greet(message -> System.out.println(message));
 
          */
-        greet((String message) -> {
-            System.out.println(message);
-        });
+        greet(System.out::println);
 
         // other possibilities
         Printer printer1 = new ConsolePrinter(); // concrete implementation
