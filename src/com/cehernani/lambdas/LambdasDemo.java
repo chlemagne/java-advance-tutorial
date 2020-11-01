@@ -9,7 +9,14 @@ package com.cehernani.lambdas;
 public class LambdasDemo {
 
     public static void show1() {
-        greet(new ConsolePrinter());
+
+        // Anonymous Inner Class
+        greet(new Printer() {
+            @Override
+            public void print(String message) {
+                System.out.println(message);
+            }
+        });
     }
 
     public static void greet(Printer printer) {
