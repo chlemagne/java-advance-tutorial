@@ -42,6 +42,11 @@ public class StreamsDemo {
                             .filter(movie -> movie.getLikes() > 10)
                             .count();
 
+        // Another example for Movie
+        movies.stream()
+              .map(movie -> movie.getTitle())
+              .forEach(title -> System.out.println(title));
+
         // All class that implements the Collection<T> interface has the ability to return a stream
         x.stream();
 
@@ -55,8 +60,18 @@ public class StreamsDemo {
 
         // Another example
         Stream.iterate(1, n -> n + 1)
-              .limit(10);
+              .limit(10)
+              .forEach(index -> System.out.println(index));
 
+        // Another example
+        Stream<List<Integer>> stream = Stream.of(
+            List.of(1, 2, 3),
+            List.of(4, 5, 6)
+        );
+        stream.forEach(list -> System.out.println(list));
 
+        // Another example (flatMap)
+        stream.flatMap(list -> list.stream())
+              .forEach(number -> System.out.println(number));
     }
 }
