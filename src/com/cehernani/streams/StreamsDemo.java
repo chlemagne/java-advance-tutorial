@@ -1,9 +1,6 @@
 package com.cehernani.streams;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.IntFunction;
@@ -109,5 +106,13 @@ public class StreamsDemo {
                                 .limit(PAGE_SIZE)
                                 .collect(Collectors.toList());
         System.out.println(page2);
+
+        // Sorting example
+        movies.stream()
+                .sorted((a, b) -> a.getTitle().compareTo(b.getTitle()) * -1)    // implementation #1
+                .sorted(Comparator.comparing(m -> m.getTitle()))                // implementation #2 (TODO: reversed())
+                // NOTE: since implementation #2 only calls a method and nothing else, METHOD REFERENCE can be used.
+                .sorted(Comparator.comparing(Movie::getTitle).reversed())       // implementation #3
+                .forEach(movie -> System.out.println(movie));
     }
 }
