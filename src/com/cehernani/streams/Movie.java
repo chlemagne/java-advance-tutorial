@@ -10,6 +10,10 @@ public class Movie {
         this.likes = likes;
     }
 
+    @Override
+    public String toString() {
+        return title;
+    }
 
     public String getTitle() {
         return title;

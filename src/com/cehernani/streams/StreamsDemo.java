@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -22,9 +26,19 @@ public class StreamsDemo {
     public static void show1() {
 
         List<Movie> movies = List.of(
+                // Pagination (slicing) example below
+                // page 1
                 new Movie("a", 10),
                 new Movie("b", 15),
-                new Movie("c", 20)
+                new Movie("c", 20),
+                // page 2
+                new Movie("d", 13),
+                new Movie("e", 27),
+                new Movie("f", 18),
+                // page 3
+                new Movie("g", 11),
+                new Movie("h", 16),
+                new Movie("i", 29)
         );
         Collection<Integer> x = new ArrayList<>();
         int[] numbers = {1, 2, 3};
@@ -73,5 +87,27 @@ public class StreamsDemo {
         // Another example (flatMap)
         stream.flatMap(list -> list.stream())
               .forEach(number -> System.out.println(number));
+
+        /* Another example (slicing)
+            Methods:
+                - limit(n)
+                - skip(n)
+                - takeWhile(predicate)
+                - dropWhile(predicate)
+
+            Pagination Example:
+                - total movies = totalMovies = 1000
+                - movies per page = pageSize = 10 movies per page
+
+                skipValue = (currPage - 1) * pageSize;
+                limitValue = pageSize
+         */
+        final int PAGE_SIZE = 3;
+        BinaryOperator<Integer> getSkipValue = (currPage, pageSize) -> (currPage - 1) * pageSize;
+        List<Movie> page2 = movies.stream()
+                                .skip(getSkipValue.apply(2, PAGE_SIZE))
+                                .limit(PAGE_SIZE)
+                                .collect(Collectors.toList());
+        System.out.println(page2);
     }
 }
