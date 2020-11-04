@@ -124,5 +124,37 @@ public class StreamsDemo {
                 .map(Movie::getLikes)
                 .distinct()
                 .forEach(System.out::println);
+
+        /*
+            Intermediate Operations:
+                - map()
+                - flatMap()
+                - limit()
+                - skip()
+                - sorted()
+                - distinct()
+                - peek()
+
+            Simple Reducer Operations:
+                - count()
+                - anyMatch()
+                - allMatch()
+                - noneMatch()
+                - findFirst()
+                - findAny()
+                - max(comparator)
+                - min(comparator)
+         */
+        Movie movie = movies.stream()
+                            .max(Comparator.comparing(Movie::getLikes))
+                            .get();
+
+        int totalLikes = movies.stream()
+                                    // transform stream of movie objects to stream of integers
+                                    .map(Movie::getLikes)
+                                    // using the overload w/ identify eliminates the possibility of Optional return.
+                                    // therefore, the identify ensure an ``int`` return value
+                                    .reduce(0, Integer::sum);
+        System.out.println(totalLikes);
     }
 }
