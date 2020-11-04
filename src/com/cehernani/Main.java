@@ -7,14 +7,21 @@ public class Main {
     public static void main(String[] args) {
 	    // write your code here
 
+        System.out.printf("Main: %s%n", Thread.currentThread().getName());
         System.out.println(Thread.activeCount());   // 2: one for main() and one for Java's garbage collector
         System.out.println(Runtime.getRuntime()
                 .availableProcessors());            // 4: four available threads
         System.out.printf("###%n%n");
 
-        for (int count = 0; count < 10; count++) {
-            Thread thread = new Thread(new DownloadFileTask());
-            thread.start();
+        Thread thread = new Thread(new DownloadFileTask());
+        thread.start(); // new thread different from the main() thread
+
+        try {
+            thread.join(); // join new thread to the main() thread
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+        System.out.println("File is ready to be scanned");
     }
 }
