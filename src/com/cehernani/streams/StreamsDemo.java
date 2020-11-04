@@ -183,5 +183,14 @@ public class StreamsDemo {
                                 Movie::getTitle,
                                 Collectors.joining(","))
                 ));
+
+        // Partition Elements using Collector
+        Map<Boolean, String> partitionedMoviesMap = movies.stream()
+                            .collect(Collectors.partitioningBy(
+                                    mov -> mov.getLikes() > 20,
+                                    Collectors.mapping(
+                                            Movie::getTitle,
+                                            Collectors.joining(","))
+                            ));
     }
 }
