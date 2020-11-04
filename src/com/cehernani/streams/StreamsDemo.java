@@ -35,7 +35,9 @@ public class StreamsDemo {
                 // page 3
                 new Movie("g", 11),
                 new Movie("h", 16),
-                new Movie("i", 29)
+                new Movie("i", 29),
+                // Distinct example below
+                new Movie("a", 10)
         );
         Collection<Integer> x = new ArrayList<>();
         int[] numbers = {1, 2, 3};
@@ -114,5 +116,11 @@ public class StreamsDemo {
                 // NOTE: since implementation #2 only calls a method and nothing else, METHOD REFERENCE can be used.
                 .sorted(Comparator.comparing(Movie::getTitle).reversed())       // implementation #3
                 .forEach(movie -> System.out.println(movie));
+
+        // Distinct Example
+        movies.stream()
+                .map(Movie::getLikes)
+                .distinct()
+                .forEach(System.out::println);
     }
 }
