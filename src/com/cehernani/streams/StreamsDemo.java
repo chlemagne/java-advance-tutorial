@@ -3,6 +3,7 @@ package com.cehernani.streams;
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -192,5 +193,9 @@ public class StreamsDemo {
                                             Movie::getTitle,
                                             Collectors.joining(","))
                             ));
+
+        // Primitive-type Streams
+        IntStream.rangeClosed(1, 5)
+                .forEach(System.out::println);
     }
 }
