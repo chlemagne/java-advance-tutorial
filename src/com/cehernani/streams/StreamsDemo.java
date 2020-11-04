@@ -103,13 +103,22 @@ public class StreamsDemo {
          */
         final int PAGE_SIZE = 3;
         BinaryOperator<Integer> getSkipValue = (currPage, pageSize) -> (currPage - 1) * pageSize;
-        List<Movie> page2 = movies.stream()
+        IntSummaryStatistics page2Stats = movies.stream()
                                 .skip(getSkipValue.apply(2, PAGE_SIZE))
                                 .limit(PAGE_SIZE)
                                 // debug below
                                 .peek(a -> System.out.printf("INCLUDE: %s%n", a.getTitle()))
-                                .collect(Collectors.toList());
-        System.out.println(page2);
+                                /*
+                                    Collectors:
+                                        - Collector.toList()
+                                        - Collector.toSet()
+                                        - Collector.toMap()
+                                        - Collector.joining()
+                                        - Collector.summingInt()        // similar to reduce method
+                                        - ** Collector.summarizingInt() // important to real world applications
+                                 */
+                                .collect(Collectors.summarizingInt(Movie::getLikes));
+        System.out.println(page2Stats); // IntSummaryStatistics{count=3, sum=58, min=13, average=19.333333, max=27}
 
         // Sorting example
         movies.stream()
