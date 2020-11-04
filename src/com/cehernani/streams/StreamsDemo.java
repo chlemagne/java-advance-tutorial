@@ -106,6 +106,8 @@ public class StreamsDemo {
         List<Movie> page2 = movies.stream()
                                 .skip(getSkipValue.apply(2, PAGE_SIZE))
                                 .limit(PAGE_SIZE)
+                                // debug below
+                                .peek(a -> System.out.printf("INCLUDE: %s%n", a.getTitle()))
                                 .collect(Collectors.toList());
         System.out.println(page2);
 
