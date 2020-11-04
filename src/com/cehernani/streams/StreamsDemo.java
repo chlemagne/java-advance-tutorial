@@ -2,8 +2,6 @@ package com.cehernani.streams;
 
 import java.util.*;
 import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,19 +23,19 @@ public class StreamsDemo {
         List<Movie> movies = List.of(
                 // Pagination (slicing) example below
                 // page 1
-                new Movie("a", 10),
-                new Movie("b", 15),
-                new Movie("c", 20),
+                new Movie("a", 10, Genre.ACTION),
+                new Movie("b", 15, Genre.COMEDY),
+                new Movie("c", 20, Genre.THRILLER),
                 // page 2
-                new Movie("d", 13),
-                new Movie("e", 27),
-                new Movie("f", 18),
+                new Movie("d", 13, Genre.THRILLER),
+                new Movie("e", 27, Genre.ACTION),
+                new Movie("f", 18, Genre.THRILLER),
                 // page 3
-                new Movie("g", 11),
-                new Movie("h", 16),
-                new Movie("i", 29),
+                new Movie("g", 11, Genre.THRILLER),
+                new Movie("h", 16, Genre.ACTION),
+                new Movie("i", 29, Genre.COMEDY),
                 // Distinct example below
-                new Movie("a", 10)
+                new Movie("a", 10, Genre.ACTION)
         );
         Collection<Integer> x = new ArrayList<>();
         int[] numbers = {1, 2, 3};
@@ -114,6 +112,7 @@ public class StreamsDemo {
                                         - Collector.toSet()
                                         - Collector.toMap()
                                         - Collector.joining()
+                                        - Collector.groupingBy()
                                         - Collector.summingInt()        // similar to reduce method
                                         - ** Collector.summarizingInt() // important to real world applications
                                  */
@@ -165,5 +164,24 @@ public class StreamsDemo {
                                     // therefore, the identify ensure an ``int`` return value
                                     .reduce(0, Integer::sum);
         System.out.println(totalLikes);
+
+        // Grouping Elements using Collector
+        Map<Genre, List<Movie>> genreMovieListMap = movies.stream()
+                .collect(Collectors.groupingBy(Movie::getGenre));
+
+        Map<Genre, Set<Movie>> genreMovieSetMap = movies.stream()
+                .collect(Collectors.groupingBy(Movie::getGenre, Collectors.toSet()));
+
+        Map<Genre, Long> genreMovieCount = movies.stream()
+                .collect(Collectors.groupingBy(Movie::getGenre, Collectors.counting()));
+
+        // {ACTION=a,e,h,a, COMEDY=b,i, THRILLER=c,d,f,g}
+        Map<Genre, String> genreMovieStringMap = movies.stream()
+                .collect(Collectors.groupingBy(
+                        Movie::getGenre,
+                        Collectors.mapping(
+                                Movie::getTitle,
+                                Collectors.joining(","))
+                ));
     }
 }
