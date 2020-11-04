@@ -13,10 +13,9 @@ public class DownloadFileTask implements Runnable {
         System.out.printf("DOWNLOADING file using <%s>...%n",
                 Thread.currentThread().getName());
 
-        try {
-            Thread.sleep(randomMilli.get());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        for (var i = 0; i < Integer.MAX_VALUE; i++) {
+            if (Thread.currentThread().isInterrupted()) return;
+            System.out.printf("Downloading byte %d%n", i);
         }
 
         System.out.printf("COMPLETED downloading file using <%s>!!!%n",

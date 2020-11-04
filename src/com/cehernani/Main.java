@@ -17,11 +17,10 @@ public class Main {
         thread.start(); // new thread different from the main() thread
 
         try {
-            thread.join(); // join new thread to the main() thread
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        System.out.println("File is ready to be scanned");
+        thread.interrupt();
     }
 }
