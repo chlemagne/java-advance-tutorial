@@ -2,7 +2,7 @@ package com.cehernani.concurrency.nonthreadsafe;
 
 import com.cehernani.concurrency.DownloadStatus;
 
-public class DownloadStatusNTS implements DownloadStatus {
+public class DownloadStatusLocks implements DownloadStatus {
 
     private int totalBytes;
 

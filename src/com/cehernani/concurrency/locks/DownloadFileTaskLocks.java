@@ -1,13 +1,13 @@
-package com.cehernani.concurrency.nonthreadsafe;
+package com.cehernani.concurrency.locks;
 
 import com.cehernani.concurrency.DownloadFileTask;
 import com.cehernani.concurrency.DownloadStatus;
 
-public class DownloadFileTaskNTS implements DownloadFileTask {
+public class DownloadFileTaskLocks implements DownloadFileTask {
 
     private DownloadStatus status;
 
-    public DownloadFileTaskNTS(DownloadStatus status) {
+    public DownloadFileTaskLocks(DownloadStatus status) {
         this.status = status;
     }
 

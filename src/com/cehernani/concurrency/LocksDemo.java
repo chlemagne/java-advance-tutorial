@@ -1,12 +1,12 @@
 package com.cehernani.concurrency;
 
-import com.cehernani.concurrency.nonthreadsafe.DownloadFileTaskLocks;
-import com.cehernani.concurrency.nonthreadsafe.DownloadStatusLocks;
+import com.cehernani.concurrency.locks.DownloadFileTaskLocks;
+import com.cehernani.concurrency.locks.DownloadStatusLocks;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NonThreadSafeDemo {
+public class LocksDemo {
 
     public static void show1() {
 
