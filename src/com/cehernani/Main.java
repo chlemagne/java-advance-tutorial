@@ -7,6 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
 	    // write your code here
-        CompletableFutureDemo.show1();
+        CompletableFutureDemo.show2();
     }
 }

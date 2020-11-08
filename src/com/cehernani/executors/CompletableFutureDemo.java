@@ -27,4 +27,19 @@ public class CompletableFutureDemo {
             e.printStackTrace();
         }
     }
+
+    public static void show2() {
+
+        // Asynchronous API
+        MailService service = new MailService();
+        service.sendAsync();
+        System.out.println("Hello, world!");
+
+        // In real world applications, method main() runs indefinitely. Hence, add delay to see mail success result.
+        try {
+            Thread.sleep(10_000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
