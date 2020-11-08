@@ -1,6 +1,7 @@
 package com.cehernani.executors;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.function.Supplier;
@@ -38,6 +39,29 @@ public class CompletableFutureDemo {
         // In real world applications, method main() runs indefinitely. Hence, add delay to see mail success result.
         try {
             Thread.sleep(10_000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void show3() {
+
+        System.out.println(Thread.currentThread().getName());
+
+        CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> 1);
+        future1.thenRunAsync(() -> System.out.printf("Executed in (%s).%n",
+                Thread.currentThread().getName())
+        );
+
+        CompletableFuture<Integer> future2 = CompletableFuture.supplyAsync(() -> 3);
+        future2.thenAcceptAsync(result -> {
+            System.out.printf("Executed in (%s).%n",
+                    Thread.currentThread().getName());
+            System.out.println(result);
+        });
+
+        try {
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
