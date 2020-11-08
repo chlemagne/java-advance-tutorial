@@ -6,6 +6,6 @@ public class Main {
 
     public static void main(String[] args) {
 	    // write your code here
-        VolatileDemo.show1();
+        ThreadSignallingDemo.show1();
     }
 }
