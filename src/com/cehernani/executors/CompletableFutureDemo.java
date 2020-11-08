@@ -84,7 +84,17 @@ public class CompletableFutureDemo {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+    }
 
+    public static int toFahrenheit(int celsius) {
+        return (int) (celsius * 1.8) + 32;
+    }
 
+    public static void show5() {
+
+        CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> 20);
+        future1
+            .thenApply(CompletableFutureDemo::toFahrenheit) // convert to fahrenheit
+            .thenAccept(System.out::println);
     }
 }
