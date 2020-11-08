@@ -66,4 +66,25 @@ public class CompletableFutureDemo {
             e.printStackTrace();
         }
     }
+
+    public static void show4() {
+
+        // error in another thread
+        CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> {
+            System.out.println("Getting the current weather...");
+            throw new IllegalStateException();
+        });
+
+        // pass error to this thread but return the default value
+        try {
+            int temp = future1.exceptionally(ex -> 1).get();
+            System.out.println(temp);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }
