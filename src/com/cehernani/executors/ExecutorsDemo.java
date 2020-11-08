@@ -1,8 +1,6 @@
 package com.cehernani.executors;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 public class ExecutorsDemo {
 
@@ -15,6 +13,13 @@ public class ExecutorsDemo {
             the submitted tasks using its thread pools.
          */
         try {
+            // (Functional Interface) Callable's method call() returns a value/object.
+            Future<Integer> future = executor.submit(() -> {
+                RandomLongTask.simulate();
+                return 1;
+            });
+            System.out.printf("Doing more work...%n%n");
+
             for (int i = 0; i < 10; i++) {
                 // (Functional Interface) Runnable's method run() returns void.
                 executor.submit(() -> {
@@ -23,6 +28,17 @@ public class ExecutorsDemo {
                     RandomLongTask.simulate();
                 });
             }
+
+            System.out.printf("Waiting for the result...%n");
+            try {
+                // Future get() is a blocking (synchronous) method
+                int result = future.get();
+                System.out.printf("Result: %d%n%n", result);
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+
+
         } finally {
             executor.shutdown();
         }
