@@ -4,6 +4,7 @@ import com.cehernani.concurrency.nonthreadsafe.DownloadFileTaskLocks;
 import com.cehernani.concurrency.nonthreadsafe.DownloadStatusLocks;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class NonThreadSafeDemo {
 
@@ -34,6 +35,15 @@ public class NonThreadSafeDemo {
     public static void show2() {
 
         Collection<Integer> syncedCollection = Collections.synchronizedCollection(new ArrayList<>());
+
+        /*
+            Concurrent Collections.
+                These objects are better than synchronized collection because synchronization
+                can cause problems when dealing with too many threads. Hence, use concurrent collections instead.
+         */
+        Map<String, Integer> concurrentMap = new ConcurrentHashMap<>(); // thread-safe
+        concurrentMap.put("a", 1);
+        concurrentMap.put("b", 2);
 
         Thread thread1 = new Thread(() -> {
             syncedCollection.addAll(Arrays.asList(1, 2, 3));
