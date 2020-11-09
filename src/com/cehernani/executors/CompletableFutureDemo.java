@@ -112,4 +112,22 @@ public class CompletableFutureDemo {
             e.printStackTrace();
         }
     }
+
+    public static void show7() {
+
+        /*
+            thenCombine second parameter (price * exchangeRate) waits for both OnlineStore.getProductPriceAsync and
+            Forex.getUsdToPhpRateAsync() to complete before executing.
+         */
+        OnlineStore.getProductPriceAsync(17723)
+                .thenCombine(Forex.getUsdToPhpRateAsync(), (price, exchangeRate) -> price * exchangeRate)
+                .thenAccept((price) -> System.out.println("Price in PHP: " + price));
+
+        // to see in console, wait for asynchronous tasks to finish
+        try {
+            Thread.sleep(20_000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
