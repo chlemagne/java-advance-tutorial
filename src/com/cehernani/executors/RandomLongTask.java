@@ -11,7 +11,7 @@ public class RandomLongTask {
 
     public static void simulate() {
         try {
-            Thread.sleep((1 + random.nextInt(9)) * 1000);
+            Thread.sleep(1000 + random.nextInt(9000));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
