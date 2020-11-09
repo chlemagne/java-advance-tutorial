@@ -1,5 +1,7 @@
 package com.cehernani.executors;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
@@ -96,5 +98,18 @@ public class CompletableFutureDemo {
         future1
             .thenApply(CompletableFutureDemo::toFahrenheit) // convert to fahrenheit
             .thenAccept(System.out::println);
+    }
+
+    public static void show6() {
+        Authentication.getUserEmailAsync()
+                    .thenCompose(Playlist::getPlaylistAsync)
+                    .thenAcceptAsync(System.out::println);
+
+        // to see in console, wait for asynchronous tasks to finish
+        try {
+            Thread.sleep(20_000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
