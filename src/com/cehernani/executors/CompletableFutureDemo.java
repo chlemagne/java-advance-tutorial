@@ -2,10 +2,7 @@ package com.cehernani.executors;
 
 import org.w3c.dom.ls.LSOutput;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.function.Supplier;
 
 public class CompletableFutureDemo {
@@ -193,4 +190,26 @@ public class CompletableFutureDemo {
         }
     }
 
+    public static void show10() {
+
+        CompletableFuture<Integer> mirror1 = Resource.downloadFromAsync("http://downloadcast.mirror1/441134.mp4");
+
+        // Set timeout
+        try {
+            // int size = mirror1.orTimeout(6, TimeUnit.SECONDS).get(); --> NO DEFAULT VALUE
+            int size = mirror1.completeOnTimeout(0, 6, TimeUnit.SECONDS).get(); // with DEFAULT VALUE
+            System.out.println(size);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        // to see in console, wait for asynchronous tasks to finish
+        try {
+            Thread.sleep(10_000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
