@@ -170,4 +170,27 @@ public class CompletableFutureDemo {
         }
     }
 
+    public static void show9() {
+
+        /*
+            To wait for ANY asynchronous task to complete before performing a task, use
+            CompletableFuture.anyOf().
+         */
+        CompletableFuture<Integer> mirror1 = Resource.downloadFromAsync("http://downloadcast.mirror1/441134.mp4");
+        CompletableFuture<Integer> mirror2 = Resource.downloadFromAsync("http://downloadcast.mirror2/441134.mp4");
+
+        CompletableFuture.anyOf(mirror1, mirror2)
+            .thenAccept(size -> {
+                System.out.println("\tDownload complete!");
+                System.out.printf("\tDownloaded %d bytes of file.", size);
+            });
+
+        // to see in console, wait for asynchronous tasks to finish
+        try {
+            Thread.sleep(20_000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
