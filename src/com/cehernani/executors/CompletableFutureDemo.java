@@ -130,4 +130,44 @@ public class CompletableFutureDemo {
             e.printStackTrace();
         }
     }
+
+    public static void show8() {
+
+        /*
+            To wait for many asynchronous tasks to complete before performing a task, use
+            CompletableFuture.allOf().
+         */
+        CompletableFuture<Double> productPrice = OnlineStore.getProductPriceAsync(67231);
+        CompletableFuture<Double> exchangeRate = Forex.getUsdToPhpRateAsync();
+        CompletableFuture<Integer> shippingDuration = Shipping.getShippingEstimateAsync("USA", "Philippines");
+
+        CompletableFuture.allOf(productPrice, exchangeRate, shippingDuration)
+            .thenRun(() -> {
+                double price = 0.00;
+                double rate = 0.00;
+                int etd = 0;
+
+                try {
+                    price = productPrice.exceptionally(ex -> 0.00).get();
+                    rate = exchangeRate.exceptionally(ex -> 0.00).get();
+                    etd = shippingDuration.exceptionally(ex -> 0).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println("###");
+                System.out.println("Price in PHP: " + price * rate);
+                System.out.println("Shipping Duration: " + etd + " days");
+            });
+
+        // to see in console, wait for asynchronous tasks to finish
+        try {
+            Thread.sleep(20_000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
